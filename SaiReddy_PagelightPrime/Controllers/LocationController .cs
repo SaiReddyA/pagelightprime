@@ -1,5 +1,3 @@
-using PageLightPrime.API.Models.Entities;
-
 namespace SaiReddy_PagelightPrime.Controllers
 {
     [Route("Location")]

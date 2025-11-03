@@ -1,8 +1,5 @@
-﻿// wwwroot/js/location-mapping.js
+﻿$(document).ready(function () {
 
-$(document).ready(function () {
-
-    // Country change → load states
     $('#CountryId').change(function () {
         let countryId = $(this).val();
         console.log(countryId);
@@ -12,7 +9,6 @@ $(document).ready(function () {
         if (countryId) {
             $.getJSON(`/Location/GetStates?countryId=${countryId}`, function (data) {
                 $('#StateId').prop('disabled', false);
-                console.log(data);
                 $.each(data, function (i, item) {
                     $('#StateId').append(`<option value="${item.stateId}">${item.stateName}</option>`);
                 });
@@ -22,7 +18,6 @@ $(document).ready(function () {
         }
     });
 
-    // State change → load districts
     $('#StateId').change(function () {
         let stateId = $(this).val();
         $('#DistrictId').empty().append('<option value="">-- Select District --</option>');
@@ -39,11 +34,16 @@ $(document).ready(function () {
         }
     });
 
-    // Edit button click
+    const message = $('#ToastMessageData').data('message');
+    const type = $('#ToastMessageData').data('type');
+    if (message) {
+        showToast(message, type);
+    }
+
     $(document).on('click', '.btn-edit', function () {
         const mappingId = $(this).data('id');
         const countryId = $(this).data('countryid');
-        const stateId = $(this).data('stateid');
+        const stateId   = $(this).data('stateid');
         const districtId = $(this).data('districtid');
         const remarks = $(this).data('remarks');
 
@@ -61,7 +61,6 @@ $(document).ready(function () {
         $('#btnSave').text('Update Mapping');
     });
 
-    // Delete button click
     $(document).on('click', '.btn-delete', function () {
         const id = $(this).data('id');
         if (confirm('Are you sure to delete this mapping?')) {
@@ -71,14 +70,12 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click', '#ResetId', function () {
+        $('#StateId').prop('disabled', true);
+        $('#DistrictId').prop('disabled', true);
+        $('#btnSave').text('Save');
+    });
     function reloadTable() {
         $('#mappingTableContainer').load('/Location/reload-table');
-    }
-
-    // Toast handling
-    const message = $('#ToastMessageData').data('message');
-    const type = $('#ToastMessageData').data('type');
-    if (message) {
-        showToast(message, type);
-    }
+    }     
 });

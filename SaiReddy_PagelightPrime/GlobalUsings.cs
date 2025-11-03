@@ -11,4 +11,3 @@ global using PageLightPrime.API.Models.ViewModel;
 global using PageLightPrime.API.Service;
 global using PageLightPrime.API.Models.Payload;
 global using System.ComponentModel.DataAnnotations;
-
