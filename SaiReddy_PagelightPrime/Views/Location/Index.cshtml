@@ -1,0 +1,70 @@
+﻿@model LocationViewModel
+@{
+    ViewData["Title"] = "Location Mapping Management";
+}
+
+<div class="container mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Manage Location Mappings</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="SaveMapping" method="post" id="mappingForm" asp-controller="Location">
+                <input type="hidden" asp-for="locationMappingInputModel.MappingId" id="MappingId" />
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label name="Country" id="Country" class="form-label"> Country </label>
+                        <select asp-for="locationMappingInputModel.CountryId" class="form-select" id="CountryId">
+                            <option value="">-- Select Country --</option>
+                            @foreach (var c in Model.Countries)
+                            {
+                                <option value="@c.CountryId">@c.CountryName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="locationMappingInputModel.CountryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label" name="State" id="State"> State </label>
+                        <select asp-for="locationMappingInputModel.StateId" class="form-select" id="StateId" disabled>
+                            <option value="">-- Select State --</option>
+                        </select>
+                        <span asp-validation-for="locationMappingInputModel.StateId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label name="District" id="District" class="form-label"> District </label>
+                        <select asp-for="locationMappingInputModel.DistrictId" class="form-select" id="DistrictId" disabled>
+                            <option value="">-- Select District --</option>
+                        </select>
+                        <span asp-validation-for="locationMappingInputModel.DistrictId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-8">
+                        <label asp-for="locationMappingInputModel.Remarks" class="form-label"></label>
+                        <input asp-for="locationMappingInputModel.Remarks" id="Remarks" class="form-control" placeholder="Enter remarks" />
+                        <span asp-validation-for="locationMappingInputModel.Remarks" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 d-flex align-items-end justify-content-end">
+                        <button type="reset" class="btn btn-outline-primary px-4">Reset</button> &nbsp;
+                        <button type="submit" id="btnSave" class="btn btn-success px-4">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <div id="mappingTableContainer">
+            @await Html.PartialAsync("_LocationMappingTable", Model.LocationMappings)
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/location-mapping.js" asp-append-version="true"></script>
+}
+

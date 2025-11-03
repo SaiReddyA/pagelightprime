@@ -1,0 +1,14 @@
+﻿global using System.Diagnostics;
+global using PageLightPrime.API.Data;
+global using Microsoft.Data.SqlClient;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using PageLightPrime.API.Models.DTOs;
+global using PageLightPrime.API.Interfaces;
+global using PageLightPrime.API.Repositories;
+global using PageLightPrime.API.Models.Entities;
+global using PageLightPrime.API.Models.ViewModel;
+global using PageLightPrime.API.Service;
+global using PageLightPrime.API.Models.Payload;
+global using System.ComponentModel.DataAnnotations;
+
