@@ -14,7 +14,7 @@
         public int DistrictId { get; set; }
 
         [StringLength(200, ErrorMessage = "Remarks cannot exceed 200 characters")]
-        public string? Remarks { get; set; }
+        public string? Remarks { get; set; } = "";
 
         public bool IsActive { get; set; } = true;
 

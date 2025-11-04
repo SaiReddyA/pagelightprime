@@ -1,57 +1,59 @@
 ﻿@model List<LocationMappingDto>
-
-<div class="card shadow border-0">
-    <div class="card-header bg-secondary text-white">
-        <h5 class="mb-0">Existing Location Mappings</h5>
-    </div>
-    <div class="card-body p-0">
-        <table class="table table-striped table-hover mb-0 align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>Country</th>
-                    <th>State</th>
-                    <th>District</th>
-                    <th>Remarks</th>
-                    <th>Created By</th>
-                    <th>Created At</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Any())
-                {
-                    foreach (var item in Model)
+@if (Model.Count > 0)
+{
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Existing Location Mappings</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>District</th>
+                        <th>Remarks</th>
+                        <th>Created By</th>
+                        <th>Created At</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
                     {
-                        <tr>
-                            <td>@item.CountryName</td>
-                            <td>@item.StateName</td>
-                            <td>@item.DistrictName</td>
-                            <td>@item.Remarks</td>
-                            <td>@item.CreatedBy</td>
-                            <td>@item.CreatedAt.ToLocalTime().ToString("dd-MMM-yyyy hh:mm tt")</td>
-                            <td class="text-center">
-                                <button type="button"
-                                        class="btn btn-primary btn-sm btn-edit"
-                                        data-id="@item.MappingId"
-                                        data-countryid="@item.CountryId"
-                                        data-stateid="@item.StateId"
-                                        data-districtid="@item.DistrictId"
-                                        data-remarks="@item.Remarks">
-                                    <i class="bi bi-pencil"></i> Edit
-                                </button>
-                                 |
-                                <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="@item.MappingId">
-                                    <i class="bi bi-trash"></i> Delete
-                                </button>
-                            </td>
-                        </tr>
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CountryName</td>
+                                <td>@item.StateName</td>
+                                <td>@item.DistrictName</td>
+                                <td>@item.Remarks</td>
+                                <td>@item.CreatedBy</td>
+                                <td>@item.CreatedAt.ToLocalTime().ToString("dd-MMM-yyyy hh:mm tt")</td>
+                                <td class="text-center">
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm btn-edit"
+                                            data-id="@item.MappingId"
+                                            data-countryid="@item.CountryId"
+                                            data-stateid="@item.StateId"
+                                            data-districtid="@item.DistrictId"
+                                            data-remarks="@item.Remarks">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </button>
+                                    |
+                                    <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="@item.MappingId">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-                else
-                {
-                    <tr><td colspan="7" class="text-center text-muted">No mappings found.</td></tr>
-                }
-            </tbody>
-        </table>
+                    else
+                    {
+                        <tr><td colspan="7" class="text-center text-muted">No mappings found.</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+}

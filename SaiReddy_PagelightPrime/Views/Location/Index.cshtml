@@ -25,30 +25,27 @@
                         <span asp-validation-for="locationMappingInputModel.CountryId" class="text-danger"></span>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="hdnStateDiv">
                         <label class="form-label" name="State" id="State"> State </label>
-                        <select asp-for="locationMappingInputModel.StateId" class="form-select" id="StateId" disabled>
-                            <option value="">-- Select State --</option>
-                        </select>
+                        <select asp-for="locationMappingInputModel.StateId" class="form-select" id="StateId" >
+                         </select>
                         <span asp-validation-for="locationMappingInputModel.StateId" class="text-danger"></span>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="hdnDistrictDiv">
                         <label name="District" id="District" class="form-label"> District </label>
-                        <select asp-for="locationMappingInputModel.DistrictId" class="form-select" id="DistrictId" disabled>
-                            <option value="">-- Select District --</option>
+                        <select asp-for="locationMappingInputModel.DistrictId" class="form-select" id="DistrictId" >
                         </select>
                         <span asp-validation-for="locationMappingInputModel.DistrictId" class="text-danger"></span>
                     </div>
 
-                    <div class="col-md-8">
+                    @* <div class="col-md-8">
                         <label asp-for="locationMappingInputModel.Remarks" class="form-label"></label>
                         <input asp-for="locationMappingInputModel.Remarks" id="Remarks" class="form-control" placeholder="Enter remarks" />
                         <span asp-validation-for="locationMappingInputModel.Remarks" class="text-danger"></span>
-                    </div>
+                    </div> *@
 
                     <div class="col-md-4 d-flex align-items-end justify-content-end">
-                        <button type="reset" class="btn btn-outline-primary px-4" id="ResetId" >Reset</button> &nbsp;
                         <button type="submit" id="btnSave" class="btn btn-success px-4">Save</button>
                     </div>
                 </div>
@@ -56,10 +53,10 @@
         </div>
     </div>
 
-    <div class="mt-4">
-        <div id="mappingTableContainer">
+    <div class="mt-4">       
+         <div id="mappingTableContainer">
             @await Html.PartialAsync("_LocationMappingTable", Model.LocationMappings)
-        </div>
+          </div>       
     </div>
 </div>
 

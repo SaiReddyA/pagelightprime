@@ -1,38 +1,56 @@
 ﻿$(document).ready(function () {
-
+    $('#hdnStateDiv').hide();
+    $('#hdnDistrictDiv').hide();
+    $('#btnSave').hide();
     $('#CountryId').change(function () {
         let countryId = $(this).val();
-        console.log(countryId);
-        $('#StateId').empty().append('<option value="">-- Select State --</option>');
-        $('#DistrictId').empty().append('<option value="">-- Select District --</option>').prop('disabled', true);
+        $('#StateId').empty();
+        $('#DistrictId').empty();
 
         if (countryId) {
             $.getJSON(`/Location/GetStates?countryId=${countryId}`, function (data) {
-                $('#StateId').prop('disabled', false);
+                $('#hdnStateDiv').show();
+
                 $.each(data, function (i, item) {
                     $('#StateId').append(`<option value="${item.stateId}">${item.stateName}</option>`);
                 });
+
+                if (data.length > 0) {
+                    let firstStateId = data[0].stateId;
+                    $('#StateId').val(firstStateId).trigger('change'); 
+                }
             });
         } else {
-            $('#StateId').prop('disabled', true);
+            $('#hdnStateDiv').hide();
+            $('#hdnDistrictDiv').hide();
+            $('#btnSave').hide();
         }
     });
 
     $('#StateId').change(function () {
         let stateId = $(this).val();
-        $('#DistrictId').empty().append('<option value="">-- Select District --</option>');
+        $('#DistrictId').empty();
 
         if (stateId) {
             $.getJSON(`/Location/GetDistricts?stateId=${stateId}`, function (data) {
-                $('#DistrictId').prop('disabled', false);
+                $('#hdnDistrictDiv').show();
+
                 $.each(data, function (i, item) {
                     $('#DistrictId').append(`<option value="${item.districtId}">${item.districtName}</option>`);
                 });
+
+                if (data.length > 0) {
+                    let firstDistrictId = data[0].districtId;
+                    $('#DistrictId').val(firstDistrictId);
+                    $('#btnSave').show();
+                }
+                
             });
         } else {
-            $('#DistrictId').prop('disabled', true);
+            $('#hdnDistrictDiv').hide();
         }
     });
+
 
     const message = $('#ToastMessageData').data('message');
     const type = $('#ToastMessageData').data('type');
@@ -49,7 +67,8 @@
 
         $('#MappingId').val(mappingId);
         $('#Remarks').val(remarks);
-
+        $('#hdnDistrictDiv').show();
+        $('#hdnStateDiv').show();
         $('#CountryId').val(countryId).trigger('change');
         setTimeout(function () {
             $('#StateId').val(stateId).trigger('change');
