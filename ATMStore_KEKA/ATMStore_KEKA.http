@@ -1,0 +1,6 @@
+@ATMStore_KEKA_HostAddress = http://localhost:5126
+
+GET {{ATMStore_KEKA_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
